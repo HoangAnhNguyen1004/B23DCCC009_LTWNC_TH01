@@ -1,0 +1,143 @@
+/* ===== Hiệu ứng bổ sung (import SAU index.css) ===== */
+
+/* 1. Tick checkbox "nảy" khi được chọn */
+.check-label input:checked {
+    animation: check-pop 320ms var(--ease-out);
+}
+
+@keyframes check-pop {
+    0% {
+        transform: scale(0.85);
+    }
+
+    55% {
+        transform: scale(1.14);
+    }
+
+    100% {
+        transform: scale(1);
+    }
+}
+
+/* 2. Gạch ngang tiêu đề được "vẽ" từ trái sang phải khi hoàn thành */
+.deadline-item h3.done {
+    text-decoration: none;
+    background: linear-gradient(currentColor, currentColor) no-repeat 0 58% / 100% 1px;
+    animation: strike-draw 360ms var(--ease-out) both;
+}
+
+@keyframes strike-draw {
+    from {
+        background-size: 0% 1px;
+    }
+
+    to {
+        background-size: 100% 1px;
+    }
+}
+
+/* 3. Thẻ đã hoàn thành mờ đi nhẹ, mượt */
+.deadline-item {
+    transition:
+        transform var(--duration-normal) var(--ease-out),
+        border-color var(--duration-normal) var(--ease-standard),
+        box-shadow var(--duration-normal) var(--ease-out),
+        background-color var(--duration-normal) var(--ease-standard),
+        opacity var(--duration-normal) var(--ease-standard);
+}
+
+.deadline-item:has(h3.done) {
+    opacity: 0.72;
+}
+
+/* 4. Số thống kê: nhấn nhẹ khi giá trị đổi (App.tsx đã dùng key để chạy lại) */
+.stats strong {
+    transform-origin: left center;
+}
+
+/* 5. Mục mới / đang xóa (thêm class bằng React, xem hướng dẫn) */
+.deadline-item.is-new {
+    animation:
+        enter-up var(--duration-enter) var(--ease-out) both,
+        item-flash 1200ms var(--ease-standard) 200ms;
+}
+
+@keyframes item-flash {
+    0% {
+        box-shadow: 0 0 0 0 rgb(118 139 98 / 35%);
+    }
+
+    40% {
+        box-shadow: 0 0 0 5px rgb(118 139 98 / 18%);
+    }
+
+    100% {
+        box-shadow: 0 0 0 0 rgb(118 139 98 / 0%);
+    }
+}
+
+.deadline-item.is-removing {
+    pointer-events: none;
+    animation: item-exit 260ms var(--ease-standard) forwards;
+}
+
+@keyframes item-exit {
+    to {
+        opacity: 0;
+        transform: translateX(16px) scale(0.98);
+    }
+}
+
+/* 6. Nút bộ lọc: chuyển màu mượt, active bật lên nhẹ */
+.filter.active {
+    animation: filter-pop 220ms var(--ease-out);
+}
+
+@keyframes filter-pop {
+    from {
+        transform: scale(0.94);
+    }
+
+    to {
+        transform: scale(1);
+    }
+}
+
+/* 7. Badge ưu tiên cao: nhịp nhấn một lần khi xuất hiện */
+.badge.high::before {
+    animation: dot-pulse 1.4s var(--ease-standard) 600ms 2;
+}
+
+@keyframes dot-pulse {
+
+    0%,
+    100% {
+        transform: scale(1);
+    }
+
+    50% {
+        transform: scale(1.8);
+        opacity: 0.5;
+    }
+}
+
+/* 8. Nút chính: trạng thái loading nếu bạn thêm aria-busy="true" */
+.primary[aria-busy="true"] {
+    pointer-events: none;
+    opacity: 0.7;
+    animation: busy-breathe 1s ease-in-out infinite;
+}
+
+@keyframes busy-breathe {
+    50% {
+        opacity: 0.45;
+    }
+}
+
+/* Tôn trọng giảm chuyển động */
+@media (prefers-reduced-motion: reduce) {
+    .deadline-item.is-removing {
+        animation: none !important;
+        opacity: 0;
+    }
+}

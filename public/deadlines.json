@@ -1,0 +1,28 @@
+{
+    "data": [
+        {
+            "id": "deadline-1",
+            "subject": "Lập trình Web nâng cao",
+            "title": "Hoàn thành bài TypeScript",
+            "dueDate": "2026-10-12",
+            "priority": "high",
+            "completed": false
+        },
+        {
+            "id": "deadline-2",
+            "subject": "Cơ sở dữ liệu",
+            "title": "Thiết kế sơ đồ ERD",
+            "dueDate": "2026-10-15",
+            "priority": "medium",
+            "completed": false
+        },
+        {
+            "id": "deadline-3",
+            "subject": "Mạng máy tính",
+            "title": "Báo cáo giao thức TCP/IP",
+            "dueDate": "2026-10-20",
+            "priority": "low",
+            "completed": true
+        }
+    ]
+}
